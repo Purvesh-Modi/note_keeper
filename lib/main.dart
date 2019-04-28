@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:note_keeper/screens/add_or_edit_note.dart';
 import 'package:note_keeper/screens/note_list.dart';
 
 void main() => runApp(NoteKeeper());
