@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:note_keeper/screens/add_or_edit_note.dart';
+import 'package:note_keeper/screens/note_list.dart';
 
 void main() => runApp(NoteKeeper());
 
@@ -7,35 +9,12 @@ class NoteKeeper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Note Keeper',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.deepPurple,
       ),
-      home: NoteKeeperHomePage(),
-    );
-  }
-}
-
-class NoteKeeperHomePage extends StatefulWidget {
-
-  @override
-  _NoteKeeperHomePageState createState() => _NoteKeeperHomePageState();
-}
-
-class _NoteKeeperHomePageState extends State<NoteKeeperHomePage> {
-
-  @override
-  Widget build(BuildContext context) {
-        return Scaffold(
-      appBar: AppBar(
-        title: Text("Notes"),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[],
-        ),
-      ),
+      home: NoteList(),
     );
   }
 }
