@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:note_keeper/models/Note.dart';
-import 'package:note_keeper/screens/add_or_edit_note.dart';
 import 'package:note_keeper/utils/database_helper.dart';
 import 'package:sqflite/sqlite_api.dart';
 
@@ -59,7 +58,8 @@ class NoteListState extends State<NoteList> {
                 color: Colors.red,
               ),
             ),
-            onTap: () => _navigateToAddOrEditNote('Edit Note', noteList[position]),
+            onTap: () =>
+                _navigateToAddOrEditNote('Edit Note', noteList[position]),
           ),
         );
       },
@@ -67,16 +67,15 @@ class NoteListState extends State<NoteList> {
   }
 
   void _navigateToAddOrEditNote(String title, Note note) async {
-    bool result = await Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => AddOrEditNote(title, note),
-      ),
+    bool result = false;
+    result = await Navigator.of(context).pushNamed(
+      '/second',
+      arguments: Data(title, note),
     );
 
-    if(result){
+    if (result) {
       _getUpdatedNotes();
-    }else{
+    } else {
       return;
     }
   }
@@ -101,9 +100,9 @@ class NoteListState extends State<NoteList> {
     return Icon(Icons.keyboard_arrow_right);
   }
 
-  void _deleteNote(BuildContext context, Note note) async{
+  void _deleteNote(BuildContext context, Note note) async {
     int result = await databaseHelper.deleteNote(note);
-    if(result != 0){
+    if (result != 0) {
       _showSnackBar(context, 'Note Deleted Successfully');
       _getUpdatedNotes();
     }
@@ -116,7 +115,7 @@ class NoteListState extends State<NoteList> {
 
   void _getUpdatedNotes() {
     final Future<Database> dbFuture = databaseHelper.initializeDatabase();
-    dbFuture.then((database){
+    dbFuture.then((database) {
       Future<List<Note>> noteFuture = databaseHelper.getNoteList();
       noteFuture.then((noteList) => _updateNoteList(noteList));
     });
@@ -128,4 +127,14 @@ class NoteListState extends State<NoteList> {
       this._itemCount = noteList.length;
     });
   }
+}
+
+class Data {
+  String _appBarTitle;
+  dynamic _data;
+  Data(this._appBarTitle, this._data);
+
+  dynamic get data => _data;
+
+  String get appBarTitle => _appBarTitle;
 }

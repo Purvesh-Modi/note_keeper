@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:note_keeper/screens/note_list.dart';
+import 'package:note_keeper/screen_routing/route_generator.dart';
 
 void main() => runApp(NoteKeeper());
 
@@ -13,7 +13,8 @@ class NoteKeeper extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.deepPurple,
       ),
-      home: NoteList(),
+      initialRoute: '/',
+      onGenerateRoute: RouteGenerator.generateRoute,
     );
   }
 }

@@ -178,6 +178,6 @@ class AddOrEditNoteState extends State<AddOrEditNote> {
   String getPriorityAsString(int value) => _priorities[value - 1];
 
   void navigateToLastScreen(bool result) {
-    Navigator.pop(context, result);
+    Navigator.of(context).pop(result);
   }
 }
