@@ -93,11 +93,20 @@ class NoteListState extends State<NoteList> {
   Icon getPriorityIcon(int priority) {
     switch (priority - 1) {
       case 0:
-        return Icon(Icons.keyboard_arrow_right);
+        return Icon(
+          Icons.keyboard_arrow_right,
+          color: Colors.red,
+        );
       case 1:
-        return Icon(Icons.play_arrow);
+        return Icon(
+          Icons.play_arrow,
+          color: Colors.green,
+        );
     }
-    return Icon(Icons.keyboard_arrow_right);
+    return Icon(
+      Icons.keyboard_arrow_right,
+      color: Colors.red,
+    );
   }
 
   void _deleteNote(BuildContext context, Note note) async {
@@ -132,6 +141,7 @@ class NoteListState extends State<NoteList> {
 class Data {
   String _appBarTitle;
   dynamic _data;
+
   Data(this._appBarTitle, this._data);
 
   dynamic get data => _data;

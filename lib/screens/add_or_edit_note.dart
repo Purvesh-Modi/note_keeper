@@ -121,7 +121,6 @@ class AddOrEditNoteState extends State<AddOrEditNote> {
   }
 
   void _onDropdownItemSelected(String newValueSelected) {
-    updatePriorityAsInt(newValueSelected);
     setState(() {
       _currentSelected = newValueSelected;
     });
@@ -137,6 +136,7 @@ class AddOrEditNoteState extends State<AddOrEditNote> {
 
   void _onSaveButtonClicked() async {
     _note.createdOn = DateFormat.yMMMd().format(DateTime.now());
+    updatePriorityAsInt(_currentSelected);
     var result;
     if (_note.id != null) {
       result = await databaseHelper.updateNote(_note);
@@ -147,7 +147,7 @@ class AddOrEditNoteState extends State<AddOrEditNote> {
     if (result != 0) {
       navigateToLastScreen(true); //Success
     } else {
-      navigateToLastScreen(true); //Failure
+      navigateToLastScreen(false); //Failure
     }
   }
 
@@ -160,7 +160,7 @@ class AddOrEditNoteState extends State<AddOrEditNote> {
     if (result != 0) {
       navigateToLastScreen(true);
     } else {
-      navigateToLastScreen(true);
+      navigateToLastScreen(false);
     }
   }
 
